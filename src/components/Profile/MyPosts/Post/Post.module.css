@@ -1,0 +1,13 @@
+.item {
+  color: #09b39d;
+}
+
+.item img {
+   width: 50px;
+  border-radius: 30px;
+ }
+
+/* а можно было использовать className={s.img} */
+/*.img {*/
+/*  width: 50px;*/
+/*}*/
