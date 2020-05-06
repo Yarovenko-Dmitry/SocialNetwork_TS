@@ -11,22 +11,8 @@
 }
 
 
-.header {
-  grid-area: h;
-  background-color: lightgreen;
-}
 
-.header img {
-  width: 45px;
 
-}
 
-.nav {
-  grid-area: n;
-  background-color: palegoldenrod;
-}
 
-.content {
-  grid-area: c;
-  background-color: lightblue;
-}
+

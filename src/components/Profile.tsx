@@ -1,8 +1,9 @@
 import React from "react";
+import s from './Profile.module.css'
 
-export const Profile = () => {
+const Profile = () => {
   return (
-    <div className={'content'}>
+    <div className={s.content}>
       <div><img
         src="https://lh4.googleusercontent.com/proxy/x0kSBZDM2lLD9jxQXJ2TydhhwWn8NHTEVtvtAwKCqMVcuNY4EMDe7c2EfnHm5fbGLBVHxqs8HJbBfKhNEZoAAhDe2YFv6HOPAUIec1KHuT-K4adL"
         alt="img"/>
@@ -13,15 +14,17 @@ export const Profile = () => {
         <div>
           New post
         </div>
-        <div>
-          <div>
+        <div className={s.posts}>
+          <div className={s.item}>
             post1
           </div>
-          <div>
+          <div className={s.item}>
             post2
           </div>
         </div>
       </div>
     </div>
   )
-};
+}
+
+export default Profile;
