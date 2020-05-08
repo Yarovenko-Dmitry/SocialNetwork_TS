@@ -6,19 +6,19 @@ const Navbar = () => {
   return (
     <nav className={s.nav}>
       <div className={`${s.item}`}>
-        <NavLink to={'/profile'} activeClassName={s.activLink}>JS Profile JS</NavLink>
+        <NavLink to={'/profile'} activeClassName={s.activLink}>TS Profile TS</NavLink>
       </div>
       <div className={s.item}>
-        <NavLink to={'/dialogs'} activeClassName={s.activLink}>JS Message JS</NavLink>
+        <NavLink to={'/dialogs'} activeClassName={s.activLink}>TS Message TS</NavLink>
       </div>
       <div className={s.item}>
-        <NavLink to={'/news'} activeClassName={s.activLink}>JS News JS</NavLink>
+        <NavLink to={'/news'} activeClassName={s.activLink}>TS News TS</NavLink>
       </div>
       <div className={s.item}>
-        <NavLink to={'/music'} activeClassName={s.activLink}>JS Music JS</NavLink>
+        <NavLink to={'/music'} activeClassName={s.activLink}>TS Music TS</NavLink>
       </div>
       <div className={s.item}>
-        <NavLink to={'/settings'} activeClassName={s.activLink}>JS Settings JS</NavLink>
+        <NavLink to={'/settings'} activeClassName={s.activLink}>TS Settings TS</NavLink>
       </div>
     </nav>
   )
