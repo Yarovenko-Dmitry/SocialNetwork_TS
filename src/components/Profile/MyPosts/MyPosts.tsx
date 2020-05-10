@@ -1,15 +1,17 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {DialogType, MessageType, PostType} from "../../../index";
 
-const MyPosts = () => {
-  let posts = [
-    {id: 1, message: 'Hi, how are you?', likesCount: 0 },
-    {id: 2, message: 'It\'s my first post', likesCount: 48},
-  ];
 
-  let postsElenments = posts
-    .map( p =>
+type MyPostsType = {
+  posts: Array<PostType>
+};
+
+const MyPosts = (props: MyPostsType) => {
+
+  let postsElenments = props.posts
+    .map((p: { message: string; likesCount: number; }) =>
       <Post message={p.message} likesCount={p.likesCount}/>
     );
 
