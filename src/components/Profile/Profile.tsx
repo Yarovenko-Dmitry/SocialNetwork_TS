@@ -4,14 +4,16 @@ import {ProfileInfo} from "./MyPosts/ProfileInfo/ProfileInfo";
 import {DialogType, MessageType, PostType} from "../../index";
 
 type ProfileType = {
-  posts: Array<PostType>
+  state: {
+    posts: Array<PostType>
+  }
 };
 
 const Profile = (props: ProfileType) => {
   return (
     <div>
       <ProfileInfo/>
-      <MyPosts posts={props.posts}/>
+      <MyPosts posts={props.state.posts}/>
     </div>
   )
 }
