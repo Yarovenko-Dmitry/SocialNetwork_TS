@@ -2,10 +2,12 @@ import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
+import {addPostType} from "../../../redux/state";
 
 
 type MyPostsType = {
-  posts: Array<PostType>
+  posts: Array<PostType>,
+  addPost: addPostType
 };
 
 const MyPosts = (props: MyPostsType) => {
@@ -16,12 +18,15 @@ const MyPosts = (props: MyPostsType) => {
       <Post message={p.message} likesCount={p.likesCount}/>
     );
 
-  let newPostElement: React.RefObject<any> = React.createRef();
+  let newPostElement = React.createRef<HTMLTextAreaElement>();
 
   const addPost = () => {
+    if(newPostElement.current) {
+      let text = newPostElement.current.value;
+      props.addPost(text);
+    }
+    // let bbb  = newPostElement.current && newPostElement.current.value;
 
-    const text = newPostElement.current.value;
-    alert(text);
   };
 
   return (

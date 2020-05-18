@@ -7,7 +7,8 @@ export type StateType = {
   dialogsPage: {
     dialogs: Array<DialogType>,
     messages: Array<MessageType>
-  }
+  },
+  sidebar: any
 };
 
 let state:StateType = {
@@ -39,7 +40,18 @@ let state:StateType = {
         {id: 5, message: 'thanksgiving'},
         {id: 6, message: 'fame and honor'}
       ]
-  }
+  },
+  sidebar: {}
 };
 
+export type addPostType = (text: string) => void
+
+export let addPost = (postMessage : string) => {
+  let newPost : PostType = {
+    id: 5,
+    message: postMessage,
+    likesCount: 0
+  };
+  state.profilePage.posts.push(newPost);
+};
 export default state;
