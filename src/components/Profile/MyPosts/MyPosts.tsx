@@ -24,6 +24,7 @@ const MyPosts = (props: MyPostsType) => {
     if(newPostElement.current) {
       let text = newPostElement.current.value;
       props.addPost(text);
+      newPostElement.current.value = '';
     }
     // let bbb  = newPostElement.current && newPostElement.current.value;
 

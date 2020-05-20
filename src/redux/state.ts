@@ -1,4 +1,5 @@
 import {DialogType, MessageType, PostType} from "../index";
+import {rerenderEntireTree} from "../rerender";
 
 export type StateType = {
   profilePage: {
@@ -53,5 +54,6 @@ export let addPost = (postMessage : string) => {
     likesCount: 0
   };
   state.profilePage.posts.push(newPost);
+  rerenderEntireTree(state);
 };
 export default state;
