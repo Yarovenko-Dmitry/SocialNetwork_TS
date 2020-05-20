@@ -3,7 +3,8 @@ import {rerenderEntireTree} from "../rerender";
 
 export type StateType = {
   profilePage: {
-    posts: Array<PostType>
+    posts: Array<PostType>,
+    newPostText: string
   },
   dialogsPage: {
     dialogs: Array<DialogType>,
@@ -12,7 +13,7 @@ export type StateType = {
   sidebar: any
 };
 
-let state:StateType = {
+let state: StateType = {
   profilePage: {
     posts:
       [
@@ -20,7 +21,8 @@ let state:StateType = {
         {id: 2, message: 'It\'s my first post', likesCount: 48},
         {id: 3, message: 'Second post', likesCount: 8},
         {id: 4, message: 'e-ge-gey', likesCount: 4}
-      ]
+      ],
+    newPostText: 'exampl test'
   },
   dialogsPage: {
     dialogs:
@@ -45,15 +47,24 @@ let state:StateType = {
   sidebar: {}
 };
 
-export type addPostType = (text: string) => void
+export type addPostType = () => void
 
-export let addPost = (postMessage : string) => {
-  let newPost : PostType = {
+export let addPost = () => {
+  let newPost: PostType = {
     id: 5,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likesCount: 0
   };
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
   rerenderEntireTree(state);
 };
+
+export type updateNewPostTextType = (text: string) => void
+
+export let updateNewPostText = (newText: string) => {
+  state.profilePage.newPostText = newText;
+  rerenderEntireTree(state);
+};
+
 export default state;
