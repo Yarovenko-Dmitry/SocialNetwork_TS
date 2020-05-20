@@ -1,5 +1,8 @@
 import {DialogType, MessageType, PostType} from "../index";
-import {rerenderEntireTree} from "../rerender";
+
+let rerenderEntireTree = (state: StateType) => {
+  console.log('State was changed');
+}
 
 export type StateType = {
   profilePage: {
@@ -47,7 +50,7 @@ let state: StateType = {
   sidebar: {}
 };
 
-export type addPostType = () => void
+export type addPostType = () => void;
 
 export let addPost = () => {
   let newPost: PostType = {
@@ -60,11 +63,17 @@ export let addPost = () => {
   rerenderEntireTree(state);
 };
 
-export type updateNewPostTextType = (text: string) => void
+export type updateNewPostTextType = (text: string) => void;
 
 export let updateNewPostText = (newText: string) => {
   state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 };
+
+export type SubscribeType = (state: StateType) => void;
+
+export const subscribe = (observer: SubscribeType) => {
+  rerenderEntireTree = observer;
+}
 
 export default state;
