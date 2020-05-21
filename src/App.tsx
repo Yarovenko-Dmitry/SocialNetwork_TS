@@ -9,12 +9,10 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
-import {AddPostType, DispatchType, StateType, UpdateNewPostTextType} from "./redux/state";
+import {DispatchType, StateType} from "./redux/state";
 
 type AppType = {
   state: StateType,
-  // addPost: AddPostType
-  // updateNewPostText: UpdateNewPostTextType
   dispatch: DispatchType
 };
 
