@@ -2,13 +2,13 @@ import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
-import {addPostType, updateNewPostTextType} from "../../../redux/state";
+import {AddPostType, UpdateNewPostTextType} from "../../../redux/state";
 
 
 type MyPostsType = {
   posts: Array<PostType>,
-  addPost: addPostType,
-  updateNewPostText: updateNewPostTextType,
+  addPost: AddPostType,
+  updateNewPostText: UpdateNewPostTextType,
   newPostText: string
 };
 

@@ -2,16 +2,16 @@ import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./MyPosts/ProfileInfo/ProfileInfo";
 import {DialogType, MessageType, PostType} from "../../index";
-import {addPostType, updateNewPostTextType} from "../../redux/state";
+import {AddPostType, UpdateNewPostTextType} from "../../redux/state";
 
 type ProfileType = {
   profilePage: {
     posts: Array<PostType>,
     newPostText: string
   },
-  addPost: addPostType,
+  addPost: AddPostType,
 
-  updateNewPostText: updateNewPostTextType
+  updateNewPostText: UpdateNewPostTextType
 };
 
 const Profile = (props: ProfileType) => {
