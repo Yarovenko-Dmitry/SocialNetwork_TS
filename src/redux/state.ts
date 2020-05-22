@@ -19,6 +19,8 @@ export type UpdateNewPostTextType = (text: string) => void;
 export type SubscribeType = (state: StateType) => void;
 export type DispatchType = (action: ActionType) => void;
 
+export type AddPostActionCreatorType = () => AddPostActionType;
+export type updateNewPostTextActionCreator = (text: string) => onPostChangeActionType;
 export type StoreType = {
   _state: StateType,
   getState: GetStateType,
@@ -38,6 +40,9 @@ export type onPostChangeActionType = {
 };
 
 export type ActionType = onPostChangeActionType | AddPostActionType
+
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let store = {
   _state: {
@@ -100,6 +105,19 @@ let store = {
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber(this._state);
     }
+  }
+}
+
+export const addPostActionCreator:AddPostActionCreatorType = () => {
+  return {
+    type: ADD_POST
+  }
+}
+
+export const updateNewPostTextActionCreator:updateNewPostTextActionCreator = (text) => {
+  return {
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
   }
 }
 

@@ -2,8 +2,11 @@ import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
-import {DispatchType, AddPostActionType, onPostChangeActionType} from "../../../redux/state";
-
+import {
+  DispatchType,
+  addPostActionCreator,
+  updateNewPostTextActionCreator
+} from "../../../redux/state";
 
 type MyPostsType = {
   posts: Array<PostType>,
@@ -22,15 +25,14 @@ const MyPosts = (props: MyPostsType) => {
 
   const addPost = () => {
     if (newPostElement.current) {
-      let action: AddPostActionType = {type: 'ADD-POST'};
-      props.dispatch(action);
+      props.dispatch(addPostActionCreator());
     }
   };
 
   let onPostChange = () => {
     let text = newPostElement.current && newPostElement.current.value;
     if (text) {
-      let action: onPostChangeActionType = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+      let action = updateNewPostTextActionCreator(text);
       props.dispatch(action);
     }
   }
