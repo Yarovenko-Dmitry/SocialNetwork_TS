@@ -3,7 +3,7 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
 import { addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
-import { DispatchType} from "../../../redux/state";
+import { DispatchType} from "../../../redux/store";
 
 type MyPostsType = {
   posts: Array<PostType>,

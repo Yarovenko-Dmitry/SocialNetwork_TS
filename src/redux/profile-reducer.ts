@@ -1,5 +1,5 @@
 import {DialogType, MessageType, PostType} from "../index";
-import store, {ActionType, AddPostActionType, OnPostChangeActionType, StateType} from "./state";
+import store, {ActionType, AddPostActionType, OnPostChangeActionType, StateType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -9,8 +9,19 @@ type ProfileReducerType = {
     newPostText: string
 };
 
+let internalState = {
+  posts:
+    [
+      {id: 1, message: 'Hi, how are you?', likesCount: 0},
+      {id: 2, message: 'It\'s my first post', likesCount: 48},
+      {id: 3, message: 'Second post', likesCount: 8},
+      {id: 4, message: 'e-ge-gey', likesCount: 4}
+    ],
+  newPostText: 'example test'
+};
+
 // const profileReducer = (state = store._state.profilePage, action: ActionType) => {
-const profileReducer = (state: ProfileReducerType, action: ActionType) => {
+const profileReducer = (state: ProfileReducerType = internalState, action: ActionType) => {
 
   switch (action.type) {
     case ADD_POST:
