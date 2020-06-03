@@ -6,8 +6,11 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import store from "./redux/redux-store";
+// !!!! import store, {SSSSStateType} from "./redux/redux-store"; замут с типизацией
 
 export let rerenderEntireTree = (state: StateType) => {
+// !!! export let rerenderEntireTree = (state: SSSSStateType) => { замут с типизацией
+
   ReactDOM.render(
     <BrowserRouter>
       <App

@@ -17,6 +17,14 @@ export type StateType = {
   sidebar: any
 };
 
+export type DialogsPageType = {
+    dialogs: Array<DialogType>,
+    messages: Array<MessageType>,
+    newMessageBody: string
+};
+
+
+
 export type GetStateType = () => StateType;
 export type CallSubscriberType = (state: StateType) => void;
 export type ObserverType = (state: StateType) => void;

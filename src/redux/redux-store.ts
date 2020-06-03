@@ -10,6 +10,7 @@ let reducers = combineReducers({
   sidebar: sidebarReducer
 });
 
+// !!! export type SSSSStateType = ReturnType<typeof reducers>  замут с типизацией
 
 let store: StoreType = createStore(reducers);
 
