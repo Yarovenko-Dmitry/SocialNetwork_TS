@@ -15,7 +15,7 @@ export type ProviderType = {
   children: any
 }
 
-export const Provider = (props: ProviderType) => {
+export const Provider = (props: any) => {
   return (
     <StoreContext.Provider value={props.store}>
       {props.children}
