@@ -1,12 +1,12 @@
-import {DialogType, MessageType, PostType} from "../index";
-import store, {ActionType, AddPostActionType, OnPostChangeActionType, StateType} from "./store";
+import {PostType} from "../index";
+import {ActionType, AddPostActionType, OnPostChangeActionType} from "./store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 type ProfileReducerType = {
-    posts: Array<PostType>,
-    newPostText: string
+  posts: Array<PostType>,
+  newPostText: string
 };
 
 let internalState = {
@@ -20,7 +20,6 @@ let internalState = {
   newPostText: 'example test'
 };
 
-// const profileReducer = (state = store._state.profilePage, action: ActionType) => {
 const profileReducer = (state: ProfileReducerType = internalState, action: ActionType) => {
 
   switch (action.type) {
@@ -30,17 +29,26 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
         state.newPostText,
         likesCount: 0
       };
-      state.posts.push(newPost);
-      state.newPostText = '';
-      return state;
-    case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
+      return {
+        ...state,
+        posts: [...state.posts, newPost],
+        newPostText: ''
+      };
+    case UPDATE_NEW_POST_TEXT: {
+      return {
+        ...state,
+        newPostText: action.newText
+      };
+    }
     default:
-      return state
+      return state;
   }
 }
+
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST});
-export const updateNewPostTextActionCreator = (text: string): OnPostChangeActionType => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const updateNewPostTextActionCreator = (text: string): OnPostChangeActionType => ({
+  type: UPDATE_NEW_POST_TEXT,
+  newText: text
+});
 
 export default profileReducer

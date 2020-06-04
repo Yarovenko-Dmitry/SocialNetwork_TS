@@ -23,8 +23,6 @@ export type DialogsPageType = {
     newMessageBody: string
 };
 
-
-
 export type GetStateType = () => StateType;
 export type CallSubscriberType = (state: StateType) => void;
 export type ObserverType = (state: StateType) => void;
