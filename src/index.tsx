@@ -16,7 +16,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-
 export type PostType = {
   id: number,
   message: string,

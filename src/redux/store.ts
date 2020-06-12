@@ -3,6 +3,7 @@ import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./siderbar-reducer";
 
 import {DialogType, MessageType, PostType} from "../index";
+import {UserType} from "./users-reducer";
 
 export type StateType = {
   profilePage: {
@@ -14,13 +15,16 @@ export type StateType = {
     messages: Array<MessageType>
     newMessageBody: string
   },
+  usersPage: {
+    users : Array<UserType>
+  }
   sidebar: any
 };
 
 export type DialogsPageType = {
-    dialogs: Array<DialogType>,
-    messages: Array<MessageType>,
-    newMessageBody: string
+  dialogs: Array<DialogType>,
+  messages: Array<MessageType>,
+  newMessageBody: string
 };
 
 export type GetStateType = () => StateType;
@@ -62,29 +66,44 @@ export type UpdateNewMessageBodyChangeActionType = {
   body: string
 };
 
+export type FollowACType = {
+  type: 'FOLLOW',
+  userId: number
+};
+export type UnFollowACType = {
+  type: 'UNFOLLOW',
+  userId: number
+};
+export type SetUsersACType = {
+  type: 'SET_USERS',
+  users: Array<UserType>
+};
+
 export type ActionType =
   AddPostActionType
   | OnPostChangeActionType
   | SendMessageActionType
-  | UpdateNewMessageBodyChangeActionType;
+  | UpdateNewMessageBodyChangeActionType
+  | FollowACType
+  | UnFollowACType
+  | SetUsersACType;
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 
-
-let store: StoreType = {
+let store: any = {
   _state: {
     profilePage: {
       posts:
         [
           {id: 1, message: 'Hi, how are you?', likesCount: 0},
-          {id: 2, message: 'It\'s my first post', likesCount: 48},
+          {id: 2, message: 'http://localhost:3001/users', likesCount: 48},
           {id: 3, message: 'Second post', likesCount: 8},
           {id: 4, message: 'e-ge-gey', likesCount: 4}
         ],
-      newPostText: 'exampl test'
+      newPostText: 'http://localhost:3001/users'
     },
     dialogsPage: {
       dialogs:
@@ -137,8 +156,11 @@ export const addPostActionCreator: AddPostActionCreatorType = () =>
 export const updateNewPostTextActionCreator: UpdateNewPostTextActionCreatorType = (text) =>
   ({type: UPDATE_NEW_POST_TEXT, newText: text})
 
-export const sendMessageActionCreator : SendMessageActionCreatorType = () => ({type: SEND_MESSAGE});
-export const updateNewMessageBodyCreator : UpdateNewMessageBodyCreatorType = (body) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body})
+export const sendMessageActionCreator: SendMessageActionCreatorType = () => ({type: SEND_MESSAGE});
+export const updateNewMessageBodyCreator: UpdateNewMessageBodyCreatorType = (body) => ({
+  type: UPDATE_NEW_MESSAGE_BODY,
+  body: body
+})
 
-export default store;
+// export default store;
 

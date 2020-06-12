@@ -17,7 +17,7 @@ let internalState = {
       {id: 3, message: 'Second post', likesCount: 8},
       {id: 4, message: 'e-ge-gey', likesCount: 4}
     ],
-  newPostText: 'example test'
+  newPostText: 'http://localhost:3001/users'
 };
 
 const profileReducer = (state: ProfileReducerType = internalState, action: ActionType) => {

@@ -1,5 +1,4 @@
-import store, {ActionType} from "./store";
-import {DialogType, MessageType} from "../index";
+import {ActionType} from "./store";
 
 type SidebarReducerType = any;
 

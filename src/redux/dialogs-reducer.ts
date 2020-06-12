@@ -11,7 +11,7 @@ type DialogsReducerType =
     newMessageBody: string
   }
 
-let internalState = {
+let internalState: DialogsReducerType = {
   dialogs:
     [
       {id: 1, name: 'Dmitry'},
