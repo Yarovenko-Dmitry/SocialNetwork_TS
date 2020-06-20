@@ -1,4 +1,4 @@
-import {ActionType, SendMessageActionType, UpdateNewMessageBodyChangeActionType} from "./store";
+import {ActionType, SendMessageActionType, UpdateNewMessageBodyChangeActionType} from "./redux-store";
 import {DialogType, MessageType} from "../index";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';

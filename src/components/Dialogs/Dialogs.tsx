@@ -4,7 +4,7 @@ import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message";
 
 import {DialogType, MessageType} from "../../index";
-import {DialogsPageType} from "../../redux/store";
+import {DialogsPageType} from "../../redux/redux-store";
 
 export type DialogsType = {
   sendMessage: () => void,

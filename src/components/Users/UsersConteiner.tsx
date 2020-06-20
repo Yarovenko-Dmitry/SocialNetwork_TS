@@ -10,7 +10,7 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import {DispatchType} from "../Profile/MyPosts/MyPostsContainer";
-import {StateType} from "../../redux/store";
+import {StateType} from "../../redux/redux-store";
 
 let mapStateToProps = (state: StateType) => {
   return {

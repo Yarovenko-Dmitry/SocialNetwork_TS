@@ -5,7 +5,7 @@ import {
   SetTotalUserCountACType,
   SetUsersACType,
   UnFollowACType
-} from "./store";
+} from "./redux-store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -67,7 +67,7 @@ const usersReducer = (state:UsersReducerType = initialState, action: ActionType)
         })
       }
     case SET_USERS: {
-      return {...state, users: [...state.users, ...action.users]}
+      return {...state, users: action.users}
     }
     case SET_CURRENT_PAGE: {
       return {...state, currentPage: action.currentPage}

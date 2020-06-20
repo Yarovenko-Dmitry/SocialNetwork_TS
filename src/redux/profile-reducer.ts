@@ -1,5 +1,5 @@
 import {PostType} from "../index";
-import {ActionType, AddPostActionType, OnPostChangeActionType} from "./store";
+import {ActionType, AddPostActionType, OnPostChangeActionType} from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
