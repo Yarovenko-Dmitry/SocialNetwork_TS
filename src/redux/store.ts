@@ -16,7 +16,10 @@ export type StateType = {
     newMessageBody: string
   },
   usersPage: {
-    users : Array<UserType>
+    users : Array<UserType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number
   }
   sidebar: any
 };
@@ -70,13 +73,25 @@ export type FollowACType = {
   type: 'FOLLOW',
   userId: number
 };
+
 export type UnFollowACType = {
   type: 'UNFOLLOW',
   userId: number
 };
+
 export type SetUsersACType = {
   type: 'SET_USERS',
   users: Array<UserType>
+};
+
+export type SetCurrentPageACType = {
+  type: 'SET_CURRENT_PAGE',
+  currentPage: number
+};
+
+export type SetTotalUserCountACType = {
+  type: 'SET_TOTAL_USERS_COUNT',
+  count: number
 };
 
 export type ActionType =
@@ -86,7 +101,9 @@ export type ActionType =
   | UpdateNewMessageBodyChangeActionType
   | FollowACType
   | UnFollowACType
-  | SetUsersACType;
+  | SetUsersACType
+  | SetCurrentPageACType
+  | SetTotalUserCountACType;
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
