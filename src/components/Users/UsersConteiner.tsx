@@ -9,13 +9,12 @@ import {
   unFollow,
   UserType
 } from "../../redux/users-reducer";
-import {DispatchType} from "../Profile/MyPosts/MyPostsContainer";
 import {StateType} from "../../redux/redux-store";
 import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 
-export type UsersADDtype = {
+export type UsersContainerType = {
   users: Array<UserType>,
   follow: (userId: number) => void,
   unFollow: (userId: number) => void,
@@ -29,13 +28,13 @@ export type UsersADDtype = {
   isFetching: boolean
 }
 // в React.Component приходят <тип пропса, стейт>
-// class Users extends React.Component<UsersADDtype, {}> {
+// class Users extends React.Component<UsersContainerType, {}> {
 
-class UsersContainer extends React.Component<UsersADDtype> {
+class UsersContainer extends React.Component<UsersContainerType> {
 
-  constructor(props: UsersADDtype) {
-    super(props);
-  }
+  // constructor(props: UsersContainerType) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     this.props.toggleIsFetching(true);
@@ -85,29 +84,6 @@ let mapStateToProps = (state: StateType) => {
     isFetching: state.usersPage.isFetching
   }
 }
-
-// let mapDispatchToProps = (dispatch: DispatchType) => {
-//   return {
-//     follow: (userId: number) => {
-//       dispatch(followAC(userId));
-//     },
-//     unFollow: (userId: number) => {
-//       dispatch(unFollowAC(userId));
-//     },
-//     setUsers: (users: Array<UserType>) => {
-//       dispatch(setUsersAC(users));
-//     },
-//     setCurrentPage: (pageNamber: number) => {
-//       dispatch(setCurrentPageAC(pageNamber))
-//     },
-//     setTotalUserCount: (totalCount: number) => {
-//       dispatch(setTotalUserCountAC(totalCount))
-//     },
-//     toggleIsFetching: (isFetching: boolean) => {
-//       dispatch(toggleIsFetchingAC(isFetching))
-//     },
-//   }
-// }
 
 export default connect(mapStateToProps, {
   follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching

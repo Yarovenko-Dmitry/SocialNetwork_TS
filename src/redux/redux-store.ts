@@ -9,7 +9,8 @@ import {DialogType, MessageType, PostType} from "../index";
 export type StateType = {
   profilePage: {
     posts: Array<PostType>,
-    newPostText: string
+    newPostText: string,
+    profile: any
   },
   dialogsPage: {
     dialogs: Array<DialogType>,
@@ -74,6 +75,12 @@ export type ToggleIsFetchingACType = {
   isFetching: boolean
 };
 
+export type SetUserProfileType = {
+  type: 'SET_USER_PROFILE',
+  profile: any
+};
+
+
 export type ActionType =
   AddPostActionType
   | OnPostChangeActionType
@@ -84,7 +91,8 @@ export type ActionType =
   | SetUsersACType
   | SetCurrentPageACType
   | SetTotalUsersCountACType
-  | ToggleIsFetchingACType;
+  | ToggleIsFetchingACType
+  | SetUserProfileType;
 
 export type DialogsPageType = {
   dialogs: Array<DialogType>,
