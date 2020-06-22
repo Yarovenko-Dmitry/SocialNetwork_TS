@@ -64,7 +64,7 @@ export type SetCurrentPageACType = {
   currentPage: number
 };
 
-export type SetTotalUserCountACType = {
+export type SetTotalUsersCountACType = {
   type: 'SET_TOTAL_USERS_COUNT',
   count: number
 };
@@ -83,7 +83,7 @@ export type ActionType =
   | UnFollowACType
   | SetUsersACType
   | SetCurrentPageACType
-  | SetTotalUserCountACType
+  | SetTotalUsersCountACType
   | ToggleIsFetchingACType;
 
 export type DialogsPageType = {

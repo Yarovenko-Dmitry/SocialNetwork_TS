@@ -2,7 +2,7 @@ import {
   ActionType,
   FollowACType,
   SetCurrentPageACType,
-  SetTotalUserCountACType,
+  SetTotalUsersCountACType,
   SetUsersACType, ToggleIsFetchingACType,
   UnFollowACType
 } from "./redux-store";
@@ -17,7 +17,6 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 export type UserType = {
   id: number,
   name: string,
-  // photoURL: string,
   photos: {
     small: string,
     large: string
@@ -86,11 +85,11 @@ const usersReducer = (state:UsersReducerType = initialState, action: ActionType)
   }
 }
 // followActionCreator === followAC
-export const followAC = (userId: number): FollowACType => ({type: FOLLOW, userId});
-export const unFollowAC = (userId: number): UnFollowACType => ({type: UNFOLLOW, userId});
-export const setUsersAC = (users: Array<UserType>): SetUsersACType => ({type: SET_USERS, users});
-export const setCurrentPageAC = (currentPage: number): SetCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage: currentPage}); // если свойство и значение совпадают currentPage: currentPage , то можно писать одно свойство currentPage
-export const setTotalUserCountAC = (totaUsersCount: number): SetTotalUserCountACType => ({type: SET_TOTAL_USERS_COUNT, count: totaUsersCount});
-export const toggleIsFetchingAC = (isFetching:boolean): ToggleIsFetchingACType => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const follow = (userId: number): FollowACType => ({type: FOLLOW, userId});
+export const unFollow = (userId: number): UnFollowACType => ({type: UNFOLLOW, userId});
+export const setUsers = (users: Array<UserType>): SetUsersACType => ({type: SET_USERS, users});
+export const setCurrentPage = (currentPage: number): SetCurrentPageACType => ({type: SET_CURRENT_PAGE, currentPage: currentPage}); // если свойство и значение совпадают currentPage: currentPage , то можно писать одно свойство currentPage
+export const setTotalUsersCount = (totaUsersCount: number): SetTotalUsersCountACType => ({type: SET_TOTAL_USERS_COUNT, count: totaUsersCount});
+export const toggleIsFetching = (isFetching:boolean): ToggleIsFetchingACType => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 export default usersReducer
