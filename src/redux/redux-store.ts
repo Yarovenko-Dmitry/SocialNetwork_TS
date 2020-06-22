@@ -20,7 +20,8 @@ export type StateType = {
     users : Array<UserType>,
     pageSize: number,
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
   }
   sidebar: any
 };
@@ -68,6 +69,11 @@ export type SetTotalUserCountACType = {
   count: number
 };
 
+export type ToggleIsFetchingACType = {
+  type: 'TOGGLE_IS_FETCHING',
+  isFetching: boolean
+};
+
 export type ActionType =
   AddPostActionType
   | OnPostChangeActionType
@@ -77,7 +83,8 @@ export type ActionType =
   | UnFollowACType
   | SetUsersACType
   | SetCurrentPageACType
-  | SetTotalUserCountACType;
+  | SetTotalUserCountACType
+  | ToggleIsFetchingACType;
 
 export type DialogsPageType = {
   dialogs: Array<DialogType>,

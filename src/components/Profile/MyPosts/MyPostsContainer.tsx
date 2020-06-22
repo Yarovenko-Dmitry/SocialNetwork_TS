@@ -3,7 +3,7 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
-import {ActionType, StateType} from "../../../redux/store";
+import {ActionType, StateType} from "../../../redux/redux-store";
 
 const mapStateToProps = (state: StateType) => {
   return {
