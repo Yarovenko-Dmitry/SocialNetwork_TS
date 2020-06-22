@@ -16,7 +16,7 @@ class ProfileContainer extends React.Component<ProfileContainerType & RouteCompo
 
   componentDidMount() {
 
-    let userId = this.props.match.params.userId ?  this.props.match.params.userId: null
+    let userId = this.props.match.params.userId && this.props.match.params.userId
     if (!userId) {
       userId = '2';
     }
