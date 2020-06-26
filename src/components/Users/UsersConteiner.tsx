@@ -4,7 +4,7 @@ import {
   follow,
   setCurrentPage,
   setTotalUsersCount,
-  setUsers,
+  setUsers, toggleFollowingProgress,
   toggleIsFetching,
   unFollow,
   UserType
@@ -26,7 +26,9 @@ export type UsersContainerType = {
   setCurrentPage: (totalCount: number) => void,
   totalUsersCount: number,
   toggleIsFetching: (isFetching: boolean) => void,
-  isFetching: boolean
+  isFetching: boolean,
+  toggleFollowingProgress: (isFetching: boolean, userId: number) => void,
+  followingInProgress: Array<number>
 }
 // в React.Component приходят <тип пропса, стейт>
 // class Users extends React.Component<UsersContainerType, {}> {
@@ -71,6 +73,8 @@ class UsersContainer extends React.Component<UsersContainerType> {
         users={this.props.users}
         follow={this.props.follow}
         unFollow={this.props.unFollow}
+        toggleFollowingProgress={this.props.toggleFollowingProgress}
+        followingInProgress={this.props.followingInProgress}
       />
     </>
   }
@@ -82,10 +86,11 @@ let mapStateToProps = (state: StateType) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress
   }
 }
 
 export default connect(mapStateToProps, {
-  follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching
+  follow, unFollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress
 })(UsersContainer);

@@ -23,7 +23,9 @@ export type StateType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void,
+    followingInProgress: Array<number>
   }
   sidebar: any,
   auth: {
@@ -85,17 +87,26 @@ export type SetUserProfileType = {
   profile: ProfileType
 };
 
+type UserDataType = {
+  userId: string,
+  email: string,
+  login: string
+};
+
 export type SetUserDataACType = {
   type: 'SET_USER_DATA',
   data: UserDataType
   // data: ProfileType
 };
 
-export type UserDataType = {
-  userId: string,
-  email: string,
-  login: string
+export type ToggleFollowingProgressACType = {
+  type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+  isFetching: boolean,
+  userId: number
 };
+
+
+
 
 export type ActionType =
   AddPostActionType
@@ -109,7 +120,8 @@ export type ActionType =
   | SetTotalUsersCountACType
   | ToggleIsFetchingACType
   | SetUserProfileType
-  | SetUserDataACType;
+  | SetUserDataACType
+  | ToggleFollowingProgressACType;
 
 export type DialogsPageType = {
   dialogs: Array<DialogType>,
