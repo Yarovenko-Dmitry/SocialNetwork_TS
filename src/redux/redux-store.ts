@@ -1,16 +1,17 @@
 import {combineReducers, createStore, Store} from "redux";
-import profileReducer from "./profile-reducer";
+import profileReducer, {ProfileType} from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./siderbar-reducer";
 import usersReducer, {UserType} from "./users-reducer";
 
 import {DialogType, MessageType, PostType} from "../index";
+import authReducer from './auth-reducer';
 
 export type StateType = {
   profilePage: {
     posts: Array<PostType>,
     newPostText: string,
-    profile: any
+    profile: ProfileType
   },
   dialogsPage: {
     dialogs: Array<DialogType>,
@@ -18,13 +19,17 @@ export type StateType = {
     newMessageBody: string
   },
   usersPage: {
-    users : Array<UserType>,
+    users: Array<UserType>,
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean
   }
-  sidebar: any
+  sidebar: any,
+  auth: {
+    isAuth: boolean
+    login : string
+  }
 };
 
 export type AddPostActionType = {
@@ -77,9 +82,20 @@ export type ToggleIsFetchingACType = {
 
 export type SetUserProfileType = {
   type: 'SET_USER_PROFILE',
-  profile: any
+  profile: ProfileType
 };
 
+export type SetUserDataACType = {
+  type: 'SET_USER_DATA',
+  data: UserDataType
+  // data: ProfileType
+};
+
+export type UserDataType = {
+  userId: string,
+  email: string,
+  login: string
+};
 
 export type ActionType =
   AddPostActionType
@@ -92,7 +108,8 @@ export type ActionType =
   | SetCurrentPageACType
   | SetTotalUsersCountACType
   | ToggleIsFetchingACType
-  | SetUserProfileType;
+  | SetUserProfileType
+  | SetUserDataACType;
 
 export type DialogsPageType = {
   dialogs: Array<DialogType>,
@@ -104,7 +121,8 @@ let reducers = combineReducers({
   profilePage: profileReducer,
   dialogsPage: dialogsReducer,
   sidebar: sidebarReducer,
-  usersPage: usersReducer
+  usersPage: usersReducer,
+  auth: authReducer
 });
 
 export type ReduxStoreType = Store<StateType, ActionType>

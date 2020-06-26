@@ -12,15 +12,15 @@ export type ProfileContainerType = {
 }
 type AddPropsUserIdType = { userId: string };
 
-class ProfileContainer extends React.Component<ProfileContainerType & RouteComponentProps<AddPropsUserIdType>>{
+class ProfileContainer extends React.Component<ProfileContainerType & RouteComponentProps<AddPropsUserIdType>> {
 
   componentDidMount() {
 
-    let userId = this.props.match.params.userId
+    let userId = this.props.match.params.userId;
     if (!userId) {
       userId = '2';
     }
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ userId)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then(response => {
         this.props.setUserProfile(response.data);
       });
@@ -33,10 +33,10 @@ class ProfileContainer extends React.Component<ProfileContainerType & RouteCompo
   }
 }
 
-const mapStateToProps = (state: StateType) =>({
+const mapStateToProps = (state: StateType) => ({
   profile: state.profilePage.profile
 });
 
-const WithUrlDataContainerComponent = withRouter (ProfileContainer);
+const WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {setUserProfile}) (WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);
