@@ -8,7 +8,8 @@ import {DispatchType} from "../Profile/MyPosts/MyPostsContainer";
 
 let mapStateToProps = (state: StateType) => {
   return {
-    dialogsPage: state.dialogsPage
+    dialogsPage: state.dialogsPage,
+    isAuth: state.auth.isAuth
   }
 };
 
