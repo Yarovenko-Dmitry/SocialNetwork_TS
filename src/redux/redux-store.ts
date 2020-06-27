@@ -26,8 +26,8 @@ export type StateType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void,
-    followingInProgress: Array<number>
+    toggleFollowingProgress: (isFetching: boolean, userId: string) => void,
+    followingInProgress: Array<string>
   }
   sidebar: any,
   auth: {
@@ -56,12 +56,12 @@ export type UpdateNewMessageBodyChangeActionType = {
 
 export type FollowACType = {
   type: 'FOLLOW',
-  userId: number
+  userId: string
 };
 
 export type UnFollowACType = {
   type: 'UNFOLLOW',
-  userId: number
+  userId: string
 };
 
 export type SetUsersACType = {
@@ -98,13 +98,12 @@ type UserDataType = {
 export type SetUserDataACType = {
   type: 'SET_USER_DATA',
   data: UserDataType
-  // data: ProfileType
 };
 
 export type ToggleFollowingProgressACType = {
   type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
   isFetching: boolean,
-  userId: number
+  userId: string
 };
 
 

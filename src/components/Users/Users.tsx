@@ -11,9 +11,9 @@ export type UsersType = {
   currentPage: number,
   pageSize: number,
   totalUsersCount: number,
-  followingInProgress: Array<number>
-  followThunkCreator: (userId: number) => void
-  unFollowThunkCreator: (userId: number) => void
+  followingInProgress: Array<string>
+  follow: (userId: string) => void
+  unFollow: (userId: string) => void
 }
 
 let Users = (props: UsersType) => {
@@ -50,11 +50,11 @@ let Users = (props: UsersType) => {
               {u.followed
                 ? <button disabled={props.followingInProgress.some(id => id === u.id)}
                           onClick={() => {
-                            props.unFollowThunkCreator(u.id)
+                            props.unFollow(u.id)
                           }}>Unfollow</button>
                 : <button disabled={props.followingInProgress.some(id => id === u.id)}
                           onClick={() => {
-                            props.followThunkCreator(u.id)
+                            props.follow(u.id)
 
                           }}>Follow</button>
               }

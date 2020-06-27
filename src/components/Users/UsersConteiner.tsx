@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-  followThunkCreator, getUsersThunkCreator,
+  follow, getUsers,
   setCurrentPage,
   toggleFollowingProgress,
-  unFollowThunkCreator,
+  unFollow,
   UserType
 } from "../../redux/users-reducer";
 import Users from "./Users";
@@ -20,11 +20,11 @@ export type UsersContainerType = {
   setCurrentPage: (totalCount: number) => void,
   totalUsersCount: number,
   isFetching: boolean,
-  toggleFollowingProgress: (isFetching: boolean, userId: number) => void,
-  followingInProgress: Array<number>,
+  toggleFollowingProgress: (isFetching: boolean, userId: string) => void,
+  followingInProgress: Array<string>,
   getUsers: (currentPage: number, pageSize: number) => void,
-  followThunkCreator: (userId: number) => void
-  unFollowThunkCreator: (userId: number) => void
+  follow: (userId: string) => void
+  unFollow: (userId: string) => void
 }
 // в React.Component приходят <тип пропса, стейт>
 // class Users extends React.Component<UsersContainerType, {}> {
@@ -51,8 +51,8 @@ class UsersContainer extends React.Component<UsersContainerType> {
         currentPage={this.props.currentPage}
         onPageChanged={this.onPageChanged}
         users={this.props.users}
-        followThunkCreator={this.props.followThunkCreator}
-        unFollowThunkCreator={this.props.unFollowThunkCreator}
+        follow={this.props.follow}
+        unFollow={this.props.unFollow}
         followingInProgress={this.props.followingInProgress}
       />
     </>
@@ -71,6 +71,6 @@ const mapStateToProps = (state: StateType) => {
 }
 
 export default connect(mapStateToProps, {
-  followThunkCreator, unFollowThunkCreator, setCurrentPage,
-  toggleFollowingProgress, getUsers: getUsersThunkCreator
+  follow, unFollow, setCurrentPage,
+  toggleFollowingProgress, getUsers: getUsers
 })(UsersContainer);

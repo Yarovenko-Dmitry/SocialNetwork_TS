@@ -110,6 +110,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 
+/*
 let store: any = {
   _state: {
     profilePage: {
@@ -167,6 +168,7 @@ let store: any = {
 
   }
 }
+*/
 
 export const addPostActionCreator: AddPostActionCreatorType = () =>
   ({type: ADD_POST});

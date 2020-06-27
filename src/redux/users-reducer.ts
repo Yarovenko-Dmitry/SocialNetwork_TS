@@ -18,7 +18,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 export type UserType = {
-  id: number,
+  id: string,
   name: string,
   photos: {
     small: string,
@@ -39,7 +39,7 @@ export type UsersReducerType =
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress: Array<number>
+    followingInProgress: Array<string>
   }
 
 let initialState: UsersReducerType = {
@@ -100,8 +100,8 @@ const usersReducer = (state: UsersReducerType = initialState, action: ActionType
   }
 }
 
-export const followSuccess = (userId: number): FollowACType => ({type: FOLLOW, userId});
-export const unFollowSuccess = (userId: number): UnFollowACType => ({type: UNFOLLOW, userId});
+export const followSuccess = (userId: string): FollowACType => ({type: FOLLOW, userId});
+export const unFollowSuccess = (userId: string): UnFollowACType => ({type: UNFOLLOW, userId});
 export const setUsers = (users: Array<UserType>): SetUsersACType => ({type: SET_USERS, users});
 export const setCurrentPage = (currentPage: number): SetCurrentPageACType => ({
   type: SET_CURRENT_PAGE,
@@ -115,13 +115,13 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingACType =>
   type: TOGGLE_IS_FETCHING,
   isFetching
 });
-export const toggleFollowingProgress = (isFetching: boolean, userId: number): ToggleFollowingProgressACType => ({
+export const toggleFollowingProgress = (isFetching: boolean, userId: string): ToggleFollowingProgressACType => ({
   type: TOGGLE_IS_FOLLOWING_PROGRESS,
   isFetching,
   userId
 });
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-  return (dispatch: ThunkDispatch<StateType, {}, ToggleIsFetchingACType | SetUsersACType | SetTotalUsersCountACType >) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
+  return (dispatch: ThunkDispatch<StateType, {}, ToggleIsFetchingACType | SetUsersACType | SetTotalUsersCountACType>) => {
     dispatch(toggleIsFetching(true));
     usersAPI.getUsers(currentPage, pageSize).then(data => {
       dispatch(toggleIsFetching(false));
@@ -132,7 +132,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 }
 
 
-export const followThunkCreator = (userId: number) => {
+export const follow = (userId: string) => {
   return (dispatch: ThunkDispatch<StateType, {}, ToggleFollowingProgressACType | FollowACType>) => {
     dispatch(toggleFollowingProgress(true, userId));
     usersAPI.follow(userId).then(response => {
@@ -144,7 +144,7 @@ export const followThunkCreator = (userId: number) => {
   }
 }
 
-export const unFollowThunkCreator = (userId: number) => {
+export const unFollow = (userId: string) => {
   return (dispatch: ThunkDispatch<StateType, {}, ToggleFollowingProgressACType | UnFollowACType>) => {
     dispatch(toggleFollowingProgress(true, userId));
     usersAPI.unFollow(userId).then(response => {

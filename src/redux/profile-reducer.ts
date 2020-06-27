@@ -1,5 +1,14 @@
 import {PostType} from "../index";
-import {ActionType, AddPostActionType, OnPostChangeActionType, SetUserProfileType} from "./redux-store";
+import {
+  ActionType,
+  AddPostActionType,
+  OnPostChangeActionType,
+  SetUserProfileType,
+  StateType,
+  ToggleFollowingProgressACType, UnFollowACType
+} from "./redux-store";
+import {usersAPI} from '../api/api';
+import {ThunkDispatch} from 'redux-thunk';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -21,7 +30,7 @@ export type ProfileType = {
   lookingForAJob: boolean,
   lookingForAJobDescription: null | string,
   fullName: string,
-  userId: number,
+  userId: string | number,
   photos:
     {
       small: null | string,
@@ -85,5 +94,10 @@ export const updateNewPostTextActionCreator = (text: string): OnPostChangeAction
   newText: text
 });
 
+export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<ProfileType, {}, SetUserProfileType>) => {
+  usersAPI.getProfile(userId).then(response => {
+    dispatch(setUserProfile(response.data));
+  });
+};
 
 export default profileReducer

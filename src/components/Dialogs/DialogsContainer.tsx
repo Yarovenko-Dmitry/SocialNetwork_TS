@@ -3,7 +3,7 @@ import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
-import {StateType} from "../../redux/store";
+import {StateType} from "../../redux/redux-store";
 import {DispatchType} from "../Profile/MyPosts/MyPostsContainer";
 
 let mapStateToProps = (state: StateType) => {
