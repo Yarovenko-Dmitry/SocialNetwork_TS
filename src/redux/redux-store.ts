@@ -1,11 +1,13 @@
-import {combineReducers, createStore, Store} from "redux";
+import {combineReducers, createStore, Store, applyMiddleware} from "redux";
 import profileReducer, {ProfileType} from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./siderbar-reducer";
 import usersReducer, {UserType} from "./users-reducer";
+import authReducer from './auth-reducer';
+import thunkMiddleware from 'redux-thunk';
 
 import {DialogType, MessageType, PostType} from "../index";
-import authReducer from './auth-reducer';
+
 
 export type StateType = {
   profilePage: {
@@ -30,7 +32,7 @@ export type StateType = {
   sidebar: any,
   auth: {
     isAuth: boolean
-    login : string
+    login: string
   }
 };
 
@@ -106,8 +108,6 @@ export type ToggleFollowingProgressACType = {
 };
 
 
-
-
 export type ActionType =
   AddPostActionType
   | OnPostChangeActionType
@@ -139,6 +139,8 @@ let reducers = combineReducers({
 
 export type ReduxStoreType = Store<StateType, ActionType>
 
-let store: ReduxStoreType = createStore(reducers);
+// let store: ReduxStoreType = createStore(reducers);
+
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

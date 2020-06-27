@@ -15,5 +15,12 @@ export const usersAPI = {
       {withCredentials: true}
     )
       .then(response => response.data);
+  },
+  follow(userId: number) {
+    return  instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}` )
+
+  },
+  unFollow(userId: number) {
+    return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
   }
 }
