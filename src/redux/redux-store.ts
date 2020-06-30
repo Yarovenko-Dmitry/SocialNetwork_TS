@@ -140,6 +140,8 @@ export type ReduxStoreType = Store<StateType, ActionType>
 
 // let store: ReduxStoreType = createStore(reducers);
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store: ReturnType<typeof createStore> = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+// let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {sendMessageActionCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {DispatchType} from "../Profile/MyPosts/MyPostsContainer";
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {compose} from "redux";
 
 
 let mapStateToProps = (state: StateType) => {
@@ -25,8 +26,11 @@ let mapDispatchToProps = (dispatch: DispatchType) => {
   }
 };
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
+// let AuthRedirectComponent = withAuthRedirect(Dialogs);
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+// export default DialogsContainer;
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-
-export default DialogsContainer;
+export default compose<FC>(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs);
