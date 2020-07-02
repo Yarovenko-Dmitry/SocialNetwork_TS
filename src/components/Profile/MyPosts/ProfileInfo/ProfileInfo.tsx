@@ -20,7 +20,8 @@ export const ProfileInfo = (props: AddProfileType) => {
           props.profile.photos.large ? <img src={props.profile.photos.large}/>: null
         }
         avatar + discription
-        <ProfileStatus status={'Hi. Go-go-go !'}/>
+        <ProfileStatus status={props.status}
+                       updateStatus={props.updateStatus}/>
       </div>
     </div>
   )

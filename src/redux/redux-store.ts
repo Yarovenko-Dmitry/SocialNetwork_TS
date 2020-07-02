@@ -13,7 +13,8 @@ export type StateType = {
   profilePage: {
     posts: Array<PostType>,
     newPostText: string,
-    profile: ProfileType
+    profile: ProfileType,
+    status: string
   },
   dialogsPage: {
     dialogs: Array<DialogType>,
@@ -106,6 +107,11 @@ export type ToggleFollowingProgressACType = {
   userId: string
 };
 
+export type SetStatusType = {
+  type: 'SET_STATUS',
+  status: string
+};
+
 
 export type ActionType =
   AddPostActionType
@@ -120,7 +126,8 @@ export type ActionType =
   | ToggleIsFetchingACType
   | SetUserProfileType
   | SetUserDataACType
-  | ToggleFollowingProgressACType;
+  | ToggleFollowingProgressACType
+  | SetStatusType;
 
 export type DialogsPageType = {
   dialogs: Array<DialogType>,
