@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from "react";
 import s from './ProfileInfo.module.css'
+import {StateType} from '../../../../redux/redux-store';
 
 type ProfileStatusType = {
   status: string,
@@ -30,6 +31,15 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
         status: e.currentTarget.value
       }
     )
+  }
+
+  componentDidUpdate(prevProps:ProfileStatusType, prevState: StateType) {
+    if (prevProps.status !== this.props.status){
+      this.setState({
+        status: this.props.status
+      })
+    }
+
   }
 
   render() {
