@@ -5,6 +5,7 @@ import sidebarReducer from "./siderbar-reducer";
 import usersReducer, {UserType} from "./users-reducer";
 import authReducer from './auth-reducer';
 import thunkMiddleware from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
 
 import {DialogType, MessageType, PostType} from "../index";
 
@@ -140,7 +141,8 @@ let reducers = combineReducers({
   dialogsPage: dialogsReducer,
   sidebar: sidebarReducer,
   usersPage: usersReducer,
-  auth: authReducer
+  auth: authReducer,
+  form: formReducer
 });
 
 export type ReduxStoreType = Store<StateType, ActionType>
