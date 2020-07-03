@@ -1,35 +1,13 @@
-import React, {Dispatch} from "react";
-import s from './Login.module.css'
-import {Field, InjectedFormProps, reduxForm, SubmitHandler} from 'redux-form';
+import React from "react";
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 type FormDataType = {
-  login: string
-  password: string
+  login: string,
+  password: string,
   rememberMe: boolean
 }
 
-type OwnPropsType = {
-  handleSubmit: ()=> void
-}
-
-export type DispatchPropsType = {
-  onSubmit: (data: FormDataType, dispatch: Dispatch<any>, props: OwnPropsType) => void
-}
-
-type MixFormPropsType = OwnPropsType & DispatchPropsType  & InjectedFormProps<FormDataType, OwnPropsType>;
-
-
-// type LoginFormPropsType = {
-//   handleSubmit: () => void
-// }
-//
-// type MixFormType = LoginFormPropsType & SubmitHandler<{}, {}, string>
-//
-// type DispatchPropsType {
-//   onSubmit: (data: OnSubmitDataType, dispatch: Dispatch<any>, props: LoginFormPropsType) => void
-// }
-
-const LoginForm: React.FC<MixFormPropsType> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -48,10 +26,10 @@ const LoginForm: React.FC<MixFormPropsType> = (props) => {
   )
 };
 
-const LoginReduxForm = reduxForm<FormDataType,OwnPropsType>({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
 
-const Login = (props) => {
+const Login = () => {
   const onSubmit = (formData:FormDataType) => {
     console.log(formData)
   }
