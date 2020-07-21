@@ -20,4 +20,5 @@ const Profile = (props: AddProfileType) => {
   )
 }
 
+
 export default Profile;

@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 
 import {DialogType, MessageType, PostType} from "../index";
+import {AddMassageFormDataType} from '../components/Dialogs/Dialogs';
 
 
 export type StateType = {
@@ -40,21 +41,23 @@ export type StateType = {
 
 export type AddPostActionType = {
   type: 'ADD-POST',
+  newPostText: string
 };
 
-export type OnPostChangeActionType = {
-  type: 'UPDATE-NEW-POST-TEXT',
-  newText: string
-};
+// export type OnPostChangeActionType = {
+//   type: 'UPDATE-NEW-POST-TEXT',
+//   newText: string
+// };
 
 export type SendMessageActionType = {
   type: 'SEND-MESSAGE',
+  newMessageBody: string
 };
 
-export type UpdateNewMessageBodyChangeActionType = {
-  type: 'UPDATE-NEW-MESSAGE-BODY',
-  body: string
-};
+// export type UpdateNewMessageBodyChangeActionType = {
+//   type: 'UPDATE-NEW-MESSAGE-BODY',
+//   body: string
+// };
 
 export type FollowACType = {
   type: 'FOLLOW',
@@ -116,9 +119,9 @@ export type SetStatusType = {
 
 export type ActionType =
   AddPostActionType
-  | OnPostChangeActionType
+  // | OnPostChangeActionType
   | SendMessageActionType
-  | UpdateNewMessageBodyChangeActionType
+  // | UpdateNewMessageBodyChangeActionType
   | FollowACType
   | UnFollowACType
   | SetUsersACType

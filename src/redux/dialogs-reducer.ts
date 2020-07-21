@@ -1,4 +1,4 @@
-import {ActionType, SendMessageActionType, UpdateNewMessageBodyChangeActionType} from "./redux-store";
+import {ActionType, SendMessageActionType} from "./redux-store";
 import {DialogType, MessageType} from "../index";
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
@@ -37,26 +37,26 @@ const dialogsReducer = (state: DialogsReducerType = internalState, action: Actio
 
   switch (action.type) {
     case SEND_MESSAGE:
-      let body = state.newMessageBody;
+      let body = action.newMessageBody;
       return {
         ...state,
         newMessageBody: '',
         messages: [...state.messages, {id: 7, message: body}],
       };
-    case UPDATE_NEW_MESSAGE_BODY:
-      return {
-        ...state,
-        newMessageBody: action.body
-      };
+    // case UPDATE_NEW_MESSAGE_BODY:
+    //   return {
+    //     ...state,
+    //     newMessageBody: action.body
+    //   };
     default:
       return state
   }
 }
 
-export const sendMessageActionCreator = (): SendMessageActionType => ({type: SEND_MESSAGE});
-export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageBodyChangeActionType => ({
-  type: UPDATE_NEW_MESSAGE_BODY,
-  body: body
-});
+export const sendMessageActionCreator = (newMessageBody: string): SendMessageActionType => ({type: SEND_MESSAGE, newMessageBody});
+// export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageBodyChangeActionType => ({
+//   type: UPDATE_NEW_MESSAGE_BODY,
+//   body: body
+// });
 
 export default dialogsReducer;

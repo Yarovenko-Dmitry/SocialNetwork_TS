@@ -1,15 +1,10 @@
 import {PostType} from "../index";
-import {
-  ActionType,
-  AddPostActionType,
-  OnPostChangeActionType, SetStatusType,
-  SetUserProfileType
-} from "./redux-store";
+import {ActionType, AddPostActionType, SetStatusType, SetUserProfileType} from "./redux-store";
 import {profileAPI, usersAPI} from '../api/api';
 import {ThunkDispatch} from 'redux-thunk';
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -63,7 +58,7 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
     case ADD_POST:
       let newPost = {
         id: 5, message:
-        state.newPostText,
+        action.newPostText,
         likesCount: 0
       };
       return {
@@ -71,12 +66,12 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
         posts: [...state.posts, newPost],
         newPostText: ''
       };
-    case UPDATE_NEW_POST_TEXT: {
-      return {
-        ...state,
-        newPostText: action.newText
-      };
-    }
+    // case UPDATE_NEW_POST_TEXT: {
+    //   return {
+    //     ...state,
+    //     newPostText: action.newText
+    //   };
+    // }
     case SET_USER_PROFILE: {
       return {
         ...state,
@@ -94,15 +89,15 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
   }
 }
 
-export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST});
+export const addPostActionCreator = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText});
 export const setUserProfile = (profile: ProfileType): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
 
 export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status});
 
-export const updateNewPostTextActionCreator = (text: string): OnPostChangeActionType => ({
-  type: UPDATE_NEW_POST_TEXT,
-  newText: text
-});
+// export const updateNewPostTextActionCreator = (text: string): OnPostChangeActionType => ({
+//   type: UPDATE_NEW_POST_TEXT,
+//   newText: text
+// });
 
 export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<ProfileType, {}, SetUserProfileType>) => {
   usersAPI.getProfile(userId).then(response => {
