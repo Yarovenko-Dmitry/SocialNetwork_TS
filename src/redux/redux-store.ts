@@ -36,6 +36,7 @@ export type StateType = {
   auth: {
     isAuth: boolean
     login: string
+    userId: string
   }
 };
 
@@ -95,14 +96,15 @@ export type SetUserProfileType = {
 };
 
 type UserDataType = {
-  userId: string,
-  email: string,
-  login: string
+  userId: string | null,
+  email: string | null,
+  login: string | null,
+  isAuth: boolean
 };
 
 export type SetUserDataACType = {
   type: 'SET_USER_DATA',
-  data: UserDataType
+  payload: UserDataType
 };
 
 export type ToggleFollowingProgressACType = {

@@ -1,8 +1,6 @@
 import React from "react";
 import styles from './FormsControls.module.css';
 import {WrappedFieldMetaProps, WrappedFieldProps} from 'redux-form';
-// 1 в логине не отрабатывает первое поле на валидацию
-// 2 логин отправляет на диалогах
 
 type FormControlPropsType = {
   meta: WrappedFieldMetaProps
