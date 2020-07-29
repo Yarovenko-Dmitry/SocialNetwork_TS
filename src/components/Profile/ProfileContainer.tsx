@@ -12,7 +12,7 @@ export type ProfileContainerType = {
   isAuth: boolean,
   getStatus: (userId: string) => void,
   status: string,
-  updateStatus: (status: string) =>void,
+  updateStatus: (status: string) => void,
   authorizedUserID: string
 }
 
@@ -24,7 +24,10 @@ class ProfileContainer extends React.Component<ProfileContainerType & RouteCompo
 
     let userId = this.props.match.params.userId;
     if (!userId) {
-      userId = this.props.authorizedUserID;;
+      userId = this.props.authorizedUserID;
+      if (!userId) {
+        this.props.history.push('/login')
+      }
     }
     this.props.getUserProfile(userId);
     this.props.getStatus(userId);

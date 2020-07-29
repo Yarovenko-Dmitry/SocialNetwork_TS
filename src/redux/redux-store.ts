@@ -1,15 +1,14 @@
-import {combineReducers, createStore, Store, applyMiddleware} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {ProfileType} from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./siderbar-reducer";
 import usersReducer, {UserType} from "./users-reducer";
 import authReducer from './auth-reducer';
 import thunkMiddleware from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form';
+import {reducer as formReducer} from 'redux-form';
 
 import {DialogType, MessageType, PostType} from "../index";
-import {AddMassageFormDataType} from '../components/Dialogs/Dialogs';
-
+import appReducer from './app-reducer';
 
 export type StateType = {
   profilePage: {
@@ -37,6 +36,9 @@ export type StateType = {
     isAuth: boolean
     login: string
     userId: string
+  },
+  app: {
+    initialized: boolean
   }
 };
 
@@ -45,20 +47,10 @@ export type AddPostActionType = {
   newPostText: string
 };
 
-// export type OnPostChangeActionType = {
-//   type: 'UPDATE-NEW-POST-TEXT',
-//   newText: string
-// };
-
 export type SendMessageActionType = {
   type: 'SEND-MESSAGE',
   newMessageBody: string
 };
-
-// export type UpdateNewMessageBodyChangeActionType = {
-//   type: 'UPDATE-NEW-MESSAGE-BODY',
-//   body: string
-// };
 
 export type FollowACType = {
   type: 'FOLLOW',
@@ -118,12 +110,13 @@ export type SetStatusType = {
   status: string
 };
 
+export type InitializedSuccessACType = {
+  type: 'INITIALIZED_SUCCESS'
+};
 
 export type ActionType =
   AddPostActionType
-  // | OnPostChangeActionType
   | SendMessageActionType
-  // | UpdateNewMessageBodyChangeActionType
   | FollowACType
   | UnFollowACType
   | SetUsersACType
@@ -133,12 +126,14 @@ export type ActionType =
   | SetUserProfileType
   | SetUserDataACType
   | ToggleFollowingProgressACType
-  | SetStatusType;
+  | SetStatusType
+  | InitializedSuccessACType
+  ;
 
 export type DialogsPageType = {
   dialogs: Array<DialogType>,
   messages: Array<MessageType>,
-  newMessageBody: string
+  newMessageBody: string,
 };
 
 let reducers = combineReducers({
@@ -147,15 +142,12 @@ let reducers = combineReducers({
   sidebar: sidebarReducer,
   usersPage: usersReducer,
   auth: authReducer,
-  form: formReducer
+  form: formReducer,
+  app: appReducer,
 });
 
-export type ReduxStoreType = Store<StateType, ActionType>
-
-// let store: ReduxStoreType = createStore(reducers);
+export type AppStateType = ReturnType<typeof reducers>
 
 let store: ReturnType<typeof createStore> = createStore(reducers, applyMiddleware(thunkMiddleware));
-
-// let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

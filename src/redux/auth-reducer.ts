@@ -1,7 +1,7 @@
-import {ActionType, SetUserDataACType, StateType, ToggleFollowingProgressACType, UnFollowACType} from './redux-store';
+import {ActionType, SetUserDataACType} from './redux-store';
 import {authAPI} from '../api/api';
 import {ThunkDispatch} from 'redux-thunk';
-import {stopSubmit} from 'redux-form';
+import {FormAction, stopSubmit} from 'redux-form';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -35,30 +35,32 @@ const authReducer = (state: InitialStateType = initialState, action: ActionType)
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null, isAuth: boolean): SetUserDataACType =>
   ({type: SET_USER_DATA, payload: {userId, email, login, isAuth}});
 
-export const getAuthUserData = () => (dispatch: ThunkDispatch<InitialStateType, {}, SetUserDataACType>) => {
-  authAPI.me().then(response => {
-    if (response.data.resultCode === 0) {
-      let {id, email, login} = response.data.data;
-      dispatch(setAuthUserData(id, email, login, true));
-    }
-  });
-}
-
-export const login = (email: string, password: string, rememberMe: boolean) =>
-  (dispatch: ThunkDispatch<InitialStateType, {}, any>) => {
-
-  authAPI.login(email, password, rememberMe)
+// !!! SetUserDataACType можно вместо него общий экшен передавать ActionType
+export const getAuthUserData = () => (dispatch: ThunkDispatch<InitialStateType, unknown, SetUserDataACType>) => {
+  return authAPI.me()
     .then(response => {
       if (response.data.resultCode === 0) {
-        dispatch(getAuthUserData())
-      } else {
-        const messages = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-        dispatch(stopSubmit('login', {_error: messages}));
+        let {id, email, login} = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
       }
     });
 }
 
-export const logout = () => (dispatch: ThunkDispatch<InitialStateType, {}, SetUserDataACType>) => {
+export const login = (email: string, password: string, rememberMe: boolean) =>
+  (dispatch: ThunkDispatch<InitialStateType, unknown, ActionType | FormAction>) => {
+
+    authAPI.login(email, password, rememberMe)
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(getAuthUserData())
+        } else {
+          const messages = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+          dispatch(stopSubmit('login', {_error: messages}));
+        }
+      });
+  }
+
+export const logout = () => (dispatch: ThunkDispatch<InitialStateType, {}, ActionType>) => {
   authAPI.logout()
     .then(response => {
       if (response.data.resultCode === 0) {
@@ -66,6 +68,5 @@ export const logout = () => (dispatch: ThunkDispatch<InitialStateType, {}, SetUs
       }
     });
 }
-
 
 export default authReducer;
