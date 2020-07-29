@@ -5,8 +5,9 @@ import {Message} from "./Message";
 
 import {DialogType, MessageType} from "../../index";
 import {DialogsPageType} from "../../redux/redux-store";
-import {Redirect} from 'react-router';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLengthCreator, required} from '../../utils/validators/validators';
+import {Textarea} from '../common/FormsControls/FormsControls';
 
 export type DialogsType = {
   sendMessage: (values: string) => void,
@@ -21,23 +22,9 @@ const Dialogs = (props: DialogsType) => {
 
   let dialogElements = state.dialogs.map((d: DialogType) => <DialogsItem name={d.name} key={d.id} id={d.id}/>);
   let messagesElements = state.messages.map((m: MessageType) => <Message message={m.message} key={m.id}/>);
-  // let newMessagesBody = state.newMessageBody;
-  //
-  // let onSendMessageClick = () => {
-  //   props.sendMessage();
-  // }
-  //
-  // let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   let body = e.target.value;
-  //   props.updateNewMessageBody(body);
-  // }
 
   let addNewMessage = (values: AddMassageFormDataType) => {
     props.sendMessage(values.newMessageBody);
-  }
-
-  if (!props.isAuth) {
-    return <Redirect to={'/login'}/>
   }
 
   return (
@@ -57,11 +44,17 @@ export type AddMassageFormDataType = {
   newMessageBody: string
 }
 
+const maxLength50 = maxLengthCreator(50)
+
 const AddMassageForm: React.FC<InjectedFormProps<AddMassageFormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
+        <Field component={Textarea}
+               name={'newMessageBody'}
+               placeholder={'Enter your message'}
+               validate={[required, maxLength50]}
+        />
       </div>
       <div>
         <button>Send</button>

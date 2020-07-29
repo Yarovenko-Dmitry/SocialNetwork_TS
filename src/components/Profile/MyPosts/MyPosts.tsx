@@ -3,11 +3,12 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostType} from "../../../index";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLengthCreator, required} from '../../../utils/validators/validators';
+import {Textarea} from '../../common/FormsControls/FormsControls';
 
 type MyPostsType = {
   posts: Array<PostType>,
   addPost: (newPostText: string) => void,
-  // updatedNewPostText: (text: string) => void,
   newPostText: string
 };
 
@@ -17,24 +18,6 @@ const MyPosts = (props: MyPostsType) => {
     .map(p =>
       <Post message={p.message} likesCount={p.likesCount}/>
     );
-
-  // let newPostElement = React.createRef<HTMLTextAreaElement>();
-
-  // const addPost = () => {
-  //   props.addPost();
-  //   // if (newPostElement.current) {
-  //   //   props.dispatch(addPostActionCreator());
-  //   // }
-  // };
-
-  // let onPostChange = () => {
-  //   let text = newPostElement.current && newPostElement.current.value;
-  //   if (text) {
-  //     props.updatedNewPostText(text);
-  //     // let action = updateNewPostTextActionCreator(text);
-  //     // props.dispatch(action);
-  //   }
-  // }
 
   const onAddPost = (values: AddNewPostFormDataType) => {
     props.addPost(values.newPostText);
@@ -55,13 +38,16 @@ export type AddNewPostFormDataType = {
   newPostText: string
 }
 
+const maxLength10 = maxLengthCreator(10);
+
 const AddNewPostForm: React.FC<InjectedFormProps<AddNewPostFormDataType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component={'textarea'}
+        <Field component={Textarea}
                name={'newPostText'}
                placeholder={'Enter your post'}
+               validate={[required, maxLength10]}
         />
       </div>
       <div>
