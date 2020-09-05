@@ -1,7 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {ProfileType} from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./siderbar-reducer";
 import usersReducer, {UserType} from "./users-reducer";
 import authReducer from './auth-reducer';
 import thunkMiddleware from 'redux-thunk';
@@ -42,94 +41,6 @@ export type StateType = {
   }
 };
 
-export type AddPostActionType = {
-  type: 'ADD-POST',
-  newPostText: string
-};
-
-export type SendMessageActionType = {
-  type: 'SEND-MESSAGE',
-  newMessageBody: string
-};
-
-export type FollowACType = {
-  type: 'FOLLOW',
-  userId: string
-};
-
-export type UnFollowACType = {
-  type: 'UNFOLLOW',
-  userId: string
-};
-
-export type SetUsersACType = {
-  type: 'SET_USERS',
-  users: Array<UserType>
-};
-
-export type SetCurrentPageACType = {
-  type: 'SET_CURRENT_PAGE',
-  currentPage: number
-};
-
-export type SetTotalUsersCountACType = {
-  type: 'SET_TOTAL_USERS_COUNT',
-  count: number
-};
-
-export type ToggleIsFetchingACType = {
-  type: 'TOGGLE_IS_FETCHING',
-  isFetching: boolean
-};
-
-export type SetUserProfileType = {
-  type: 'SET_USER_PROFILE',
-  profile: ProfileType
-};
-
-type UserDataType = {
-  userId: string | null,
-  email: string | null,
-  login: string | null,
-  isAuth: boolean
-};
-
-export type SetUserDataACType = {
-  type: 'SET_USER_DATA',
-  payload: UserDataType
-};
-
-export type ToggleFollowingProgressACType = {
-  type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
-  isFetching: boolean,
-  userId: string
-};
-
-export type SetStatusType = {
-  type: 'SET_STATUS',
-  status: string
-};
-
-export type InitializedSuccessACType = {
-  type: 'INITIALIZED_SUCCESS'
-};
-
-export type ActionType =
-  AddPostActionType
-  | SendMessageActionType
-  | FollowACType
-  | UnFollowACType
-  | SetUsersACType
-  | SetCurrentPageACType
-  | SetTotalUsersCountACType
-  | ToggleIsFetchingACType
-  | SetUserProfileType
-  | SetUserDataACType
-  | ToggleFollowingProgressACType
-  | SetStatusType
-  | InitializedSuccessACType
-  ;
-
 export type DialogsPageType = {
   dialogs: Array<DialogType>,
   messages: Array<MessageType>,
@@ -139,12 +50,16 @@ export type DialogsPageType = {
 let reducers = combineReducers({
   profilePage: profileReducer,
   dialogsPage: dialogsReducer,
-  sidebar: sidebarReducer,
+  // sidebar: sidebarReducer,
   usersPage: usersReducer,
   auth: authReducer,
   form: formReducer,
   app: appReducer,
 });
+
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never;
+
+export type InferActionsTypes<T extends { [key: string]: (...arg: any[]) => any }> = ReturnType<PropertiesTypes<T>>
 
 export type AppStateType = ReturnType<typeof reducers>
 

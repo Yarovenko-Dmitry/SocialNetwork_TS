@@ -1,12 +1,7 @@
 import {PostType} from "../index";
-import {ActionType, AddPostActionType, SetStatusType, SetUserProfileType} from "./redux-store";
+import {InferActionsTypes} from "./redux-store";
 import {profileAPI, usersAPI} from '../api/api';
-import {ThunkDispatch} from 'redux-thunk';
-
-const ADD_POST = 'ADD-POST';
-// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
+import {Dispatch} from 'react';
 
 export type ProfileType = {
   aboutMe: string,
@@ -55,7 +50,7 @@ let internalState: ProfileReducerType = {
 const profileReducer = (state: ProfileReducerType = internalState, action: ActionType) => {
 
   switch (action.type) {
-    case ADD_POST:
+    case 'ADD_POST':
       let newPost = {
         id: 5, message:
         action.newPostText,
@@ -66,19 +61,13 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
         posts: [...state.posts, newPost],
         newPostText: ''
       };
-    // case UPDATE_NEW_POST_TEXT: {
-    //   return {
-    //     ...state,
-    //     newPostText: action.newText
-    //   };
-    // }
-    case SET_USER_PROFILE: {
+    case 'SET_USER_PROFILE': {
       return {
         ...state,
         profile: action.profile
       };
     }
-    case SET_STATUS: {
+    case 'SET_STATUS': {
       return {
         ...state,
         status: action.status
@@ -89,37 +78,37 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
   }
 }
 
-export const addPostActionCreator = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText});
-export const setUserProfile = (profile: ProfileType): SetUserProfileType => ({type: SET_USER_PROFILE, profile});
+export type ActionType = InferActionsTypes<typeof actions>;
 
-export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status});
+export const actions = {
+  addPostActionCreator: (newPostText: string) => ({type: 'ADD_POST', newPostText} as const),
+  setUserProfile: (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile} as const),
+  setStatus: (status: string) => ({type: 'SET_STATUS', status} as const),
+}
 
-// export const updateNewPostTextActionCreator = (text: string): OnPostChangeActionType => ({
-//   type: UPDATE_NEW_POST_TEXT,
-//   newText: text
-// });
+type DispatchType = Dispatch<ActionType>;
 
-export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<ProfileType, {}, SetUserProfileType>) => {
-  usersAPI.getProfile(userId).then(response => {
-    dispatch(setUserProfile(response.data));
-  });
-};
-
-export const getStatus = (userId: string) => (dispatch: ThunkDispatch<ProfileType, {}, SetStatusType>) => {
-  profileAPI.getStatus(userId)
+export const getUserProfile = (userId: string) => (dispatch: DispatchType) => {
+  usersAPI.getProfile(userId)
     .then(response => {
-      dispatch(setStatus(response.data));
+      dispatch(actions.setUserProfile(response.data));
     });
 };
 
-export const updateStatus = (status: string) => (dispatch: ThunkDispatch<ProfileType, {}, SetStatusType>) => {
+export const getStatus = (userId: string) => (dispatch: DispatchType) => {
+  profileAPI.getStatus(userId)
+    .then(response => {
+      dispatch(actions.setStatus(response.data));
+    });
+};
+
+export const updateStatus = (status: string) => (dispatch: DispatchType) => {
   profileAPI.updateStatus(status)
     .then(response => {
       if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
+        dispatch(actions.setStatus(status));
       }
     });
 };
-
 
 export default profileReducer

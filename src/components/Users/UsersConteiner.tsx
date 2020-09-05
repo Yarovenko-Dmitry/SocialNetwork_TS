@@ -1,12 +1,6 @@
 import React, {FC} from 'react';
 import {connect} from "react-redux";
-import {
-  follow, getUsers,
-  setCurrentPage,
-  toggleFollowingProgress,
-  unFollow,
-  UserType
-} from "../../redux/users-reducer";
+import {actions, follow, getUsers, unFollow, UserType} from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 
@@ -72,10 +66,8 @@ const mapStateToProps = (state: StateType) => {
   }
 }
 
-// export default withAuthRedirect(connect(mapStateToProps, {
-//   follow, unFollow, setCurrentPage,
-//   toggleFollowingProgress, getUsers: getUsers
-// })(UsersContainer));
+const setCurrentPage = actions.setCurrentPage
+const toggleFollowingProgress = actions.toggleFollowingProgress
 
 export default compose<FC>(
   connect(mapStateToProps, {follow, unFollow, setCurrentPage, toggleFollowingProgress, getUsers: getUsers}),
