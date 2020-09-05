@@ -112,10 +112,11 @@ export const actions = {
 
 type DispatchType = Dispatch<ActionType>;
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
   return (dispatch: DispatchType) => {
     dispatch(actions.toggleIsFetching(true));
-    usersAPI.getUsers(currentPage, pageSize).then(data => {
+    dispatch(actions.setCurrentPage(page));
+    usersAPI.getUsers(page, pageSize).then(data => {
       dispatch(actions.toggleIsFetching(false));
       dispatch(actions.setUsers(data.items));
       dispatch(actions.setTotalUsersCount(data.totalCount));
