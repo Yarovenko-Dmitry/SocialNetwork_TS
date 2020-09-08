@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../../common/Preloader/Preloader";
 import {AddProfileType} from "../../Profile";
 import {ProfileStatus} from './ProfileStatus';
+import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
 
 export const ProfileInfo = (props: AddProfileType) => {
   if (!props.profile) {
@@ -20,7 +21,7 @@ export const ProfileInfo = (props: AddProfileType) => {
           props.profile.photos.large ? <img src={props.profile.photos.large}/>: null
         }
         avatar + discription
-        <ProfileStatus status={props.status}
+        <ProfileStatusWithHooks status={props.status}
                        updateStatus={props.updateStatus}/>
       </div>
     </div>
