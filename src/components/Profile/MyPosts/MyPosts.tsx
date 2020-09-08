@@ -12,12 +12,12 @@ type MyPostsType = {
   newPostText: string
 };
 
-const MyPosts = (props: MyPostsType) => {
+const MyPosts = React.memo((props: MyPostsType) => {
 
-  let postsElenments = props.posts
-    .map(p =>
-      <Post message={p.message} likesCount={p.likesCount}/>
-    );
+  let postsElenments = props.posts.map(p =>
+    <Post message={p.message} likesCount={p.likesCount}/>);
+
+  let newPostElement = React.createRef();
 
   const onAddPost = (values: AddNewPostFormDataType) => {
     props.addPost(values.newPostText);
@@ -32,7 +32,7 @@ const MyPosts = (props: MyPostsType) => {
       </div>
     </div>
   )
-}
+});
 
 export type AddNewPostFormDataType = {
   newPostText: string
