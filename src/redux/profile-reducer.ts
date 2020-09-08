@@ -61,6 +61,11 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
         posts: [...state.posts, newPost],
         newPostText: ''
       };
+    case 'DELETE_POST':
+      return {
+        ...state,
+        posts: state.posts.filter(p=> p.id !== action.postId)
+      };
     case 'SET_USER_PROFILE': {
       return {
         ...state,
@@ -82,6 +87,7 @@ export type ActionType = InferActionsTypes<typeof actions>;
 
 export const actions = {
   addPostActionCreator: (newPostText: string) => ({type: 'ADD_POST', newPostText} as const),
+  deletePostActionCreator: (postId: number) => ({type: 'DELETE_POST', postId} as const),
   setUserProfile: (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile} as const),
   setStatus: (status: string) => ({type: 'SET_STATUS', status} as const),
 }
