@@ -2,12 +2,11 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://yarovenko-dmitry.github.io/SocialNetwork_TS/",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/classnames": "^2.2.10",
-    "@types/jest": "^26.0.14",
     "@types/node": "^12.12.37",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
@@ -23,7 +22,6 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.6",
     "redux-thunk": "^2.3.0",
@@ -34,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,7 +52,12 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@types/jest": "^26.0.14",
+    "@types/react-test-renderer": "^16.9.3",
+    "gh-pages": "^3.1.0",
     "jest": "^24.9.0",
+    "react-test-renderer": "16.13.1",
     "ts-jest": "^26.3.0"
   }
 }
