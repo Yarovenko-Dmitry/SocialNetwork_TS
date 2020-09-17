@@ -7,7 +7,7 @@ type PaginatorType = {
   onPageChanged: (pageNumber: number) => void,
   totalItemsCount: number
   pageSize: number
-  portionSize: number
+  portionSize?: number
 }
 
 let Paginator: React.FC<PaginatorType> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
