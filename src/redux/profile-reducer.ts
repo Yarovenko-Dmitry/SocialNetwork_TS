@@ -20,11 +20,14 @@ export type ProfileType = {
   lookingForAJobDescription: null | string,
   fullName: string,
   userId: string | number,
-  photos:
-    {
-      small: null | string,
-      large: null | string
-    }
+  photos: PhotosType
+
+}
+
+
+export type PhotosType = {
+  small: null | string,
+  large: null | string
 }
 
 export type ProfileReducerType = {
@@ -78,6 +81,12 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
         status: action.status
       };
     }
+    case 'SAVE_PHOTO_SUCCESS': {
+      return {
+        ...state,
+        profile: {...state.profile, photos: action.photos}
+      };
+    }
     default:
       return state;
   }
@@ -88,6 +97,8 @@ export type ActionType = InferActionsTypes<typeof actions>;
 export const actions = {
   addPostActionCreator: (newPostText: string) => ({type: 'ADD_POST', newPostText} as const),
   deletePostActionCreator: (postId: number) => ({type: 'DELETE_POST', postId} as const),
+  savePhotoSuccess: (photos: PhotosType) => ({type: 'SAVE_PHOTO_SUCCESS', photos} as const),
+
   setUserProfile: (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile} as const),
   setStatus: (status: string) => ({type: 'SET_STATUS', status} as const),
 }
@@ -116,5 +127,13 @@ export const updateStatus = (status: string) => (dispatch: DispatchType) => {
       }
     });
 };
+
+export const savePhoto = (file: string) => async (dispatch: DispatchType) => {
+  const response = await profileAPI.savePhoto(file)
+  if (response.data.resultCode === 0) {
+    dispatch(actions.savePhotoSuccess(response.data.data.photos));
+  }
+};
+
 
 export default profileReducer
