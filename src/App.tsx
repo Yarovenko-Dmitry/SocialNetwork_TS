@@ -12,7 +12,7 @@ import {connect, Provider} from 'react-redux';
 import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
-import store, {StateType} from './redux/redux-store';
+import store, {AppStateType} from './redux/redux-store';
 import {withSuspense} from './hoc/withSuspense';
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -63,7 +63,7 @@ class App extends React.Component<MapStatePropType & MapDispatchPropType> {
   }
 }
 
-const mapStateToPropse = (state: StateType): MapStatePropType => ({
+const mapStateToPropse = (state: AppStateType): MapStatePropType => ({
   initialized: state.app.initialized
 })
 

@@ -5,7 +5,7 @@ import {required} from '../../utils/validators/validators';
 import {connect} from 'react-redux';
 import {login} from '../../redux/auth-reducer';
 import styles from '../common/FormsControls/FormsControls.module.css'
-import {StateType} from '../../redux/redux-store';
+import {AppStateType} from '../../redux/redux-store';
 
 type LoginFormDataType = {
   email: string,
@@ -68,7 +68,7 @@ const Login = (props:LoginType) => {
   )
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isAuth: state.auth.isAuth
 })
 

@@ -1,29 +1,29 @@
 import {PostType} from "../index";
-import {InferActionsTypes} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
 import {profileAPI, usersAPI} from '../api/api';
 import {Dispatch} from 'react';
+import {FormAction, stopSubmit} from 'redux-form';
 
 export type ProfileType = {
-  aboutMe: string,
-  contacts:
-    {
-      facebook: null | string,
-      website: null | string,
-      vk: null | string,
-      twitter: null | string,
-      instagram: null | string,
-      youtube: null | string,
-      github: null | string,
-      mainLink: null | string
-    },
-  lookingForAJob: boolean,
-  lookingForAJobDescription: null | string,
-  fullName: string,
-  userId: string | number,
+  userId: number
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  fullName: string
+  contacts: ContactsType
   photos: PhotosType
-
+  aboutMe: string
 }
 
+export type ContactsType = {
+  github: string
+  vk: string
+  facebook: string
+  instagram: string
+  twitter: string
+  website: string
+  youtube: string
+  mainLink: string
+}
 
 export type PhotosType = {
   small: null | string,
@@ -33,24 +33,24 @@ export type PhotosType = {
 export type ProfileReducerType = {
   posts: Array<PostType>,
   newPostText: string,
-  profile: null,
+  profile: ProfileType | null,
   status: string
 };
 
-let internalState: ProfileReducerType = {
+let initialState: ProfileReducerType = {
   posts:
     [
       {id: 1, message: 'Hi, how are you?', likesCount: 0},
       {id: 2, message: 'It\'s my first post', likesCount: 48},
       {id: 3, message: 'Second post', likesCount: 8},
       {id: 4, message: 'e-ge-gey', likesCount: 4}
-    ],
+    ] as Array<PostType>,
   newPostText: 'http://localhost:3001/users',
-  profile: null,
+  profile: null as ProfileType | null,
   status: ''
 };
 
-const profileReducer = (state: ProfileReducerType = internalState, action: ActionType) => {
+const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
 
   switch (action.type) {
     case 'ADD_POST':
@@ -82,17 +82,13 @@ const profileReducer = (state: ProfileReducerType = internalState, action: Actio
       };
     }
     case 'SAVE_PHOTO_SUCCESS': {
-      return {
-        ...state,
-        profile: {...state.profile, photos: action.photos}
-      };
-    }
+      return {...state, profile: {...state.profile, photos: action.photos} as ProfileType};}
     default:
       return state;
   }
 }
 
-export type ActionType = InferActionsTypes<typeof actions>;
+export type ActionsType = InferActionsTypes<typeof actions>;
 
 export const actions = {
   addPostActionCreator: (newPostText: string) => ({type: 'ADD_POST', newPostText} as const),
@@ -103,7 +99,7 @@ export const actions = {
   setStatus: (status: string) => ({type: 'SET_STATUS', status} as const),
 }
 
-type DispatchType = Dispatch<ActionType>;
+type DispatchType = Dispatch<ActionsType>;
 
 export const getUserProfile = (userId: string) => (dispatch: DispatchType) => {
   usersAPI.getProfile(userId)
@@ -128,12 +124,27 @@ export const updateStatus = (status: string) => (dispatch: DispatchType) => {
     });
 };
 
-export const savePhoto = (file: string) => async (dispatch: DispatchType) => {
+export const savePhoto = (file: File) => async (dispatch: DispatchType) => {
   const response = await profileAPI.savePhoto(file)
   if (response.data.resultCode === 0) {
     dispatch(actions.savePhotoSuccess(response.data.data.photos));
   }
 };
 
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
+  const response = await profileAPI.saveProfile(profile)
+  if (response.data.resultCode === 0) {
+    if (userId != null) {
+      dispatch(getUserProfile(userId))}
+  } else {
+    dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}));
+    return Promise.reject(response.data.messages[0]);
+  }
+};
 
 export default profileReducer
+
+export type InitialStateType = typeof initialState
+
+type ThunkType = BaseThunkType<ActionsType | FormAction>

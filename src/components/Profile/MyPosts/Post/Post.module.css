@@ -3,9 +3,10 @@
 }
 
 .item img {
-   width: 50px;
+  width: 50px;
+  height: 50px;
   border-radius: 30px;
- }
+}
 
 /* а можно было использовать className={s.img} */
 /*.img {*/

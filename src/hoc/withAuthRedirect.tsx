@@ -1,9 +1,9 @@
 import {Redirect} from 'react-router-dom';
 import React from 'react';
 import {connect} from 'react-redux';
-import {StateType} from '../redux/redux-store';
+import {AppStateType} from '../redux/redux-store';
 
-let mapStateToPropsForRedirect = (state: StateType) => ({
+let mapStateToPropsForRedirect = (state: AppStateType) => ({
   isAuth: state.auth.isAuth
 });
 
@@ -28,7 +28,7 @@ export function withAuthRedirect<WCP>(Component: React.ComponentType<WCP>) {
     return <Component {...restProps as unknown as WCP}/>
   }
 
-  let ConnectedAuthRedirectComponent = connect<MapPropsType, DispatchPropsType, WCP, StateType>(
+  let ConnectedAuthRedirectComponent = connect<MapPropsType, DispatchPropsType, WCP, AppStateType>(
     mapStateToPropsForRedirect, {
       fake: () => {
       }
@@ -42,7 +42,7 @@ export function withAuthRedirect<WCP>(Component: React.ComponentType<WCP>) {
 //                   !!!!!            ТИПИЗАЦИЯ
 // https://www.youtube.com/watch?v=TnRx8_n4SYI&feature=youtu.be&list=PLcvhF2Wqh7DM3z1XqMw0kPuxpbyMo3HvN&t=3089
 
-// let mapStateToPropsForRedirect = (state: StateType) => ({
+// let mapStateToPropsForRedirect = (state: AppStateType) => ({
 //   isAuth: state.auth.isAuth
 // });
 //

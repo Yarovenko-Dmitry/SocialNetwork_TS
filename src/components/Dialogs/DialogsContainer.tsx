@@ -1,21 +1,21 @@
 import React, {Dispatch, FC} from "react";
-import {actions, ActionType} from "../../redux/dialogs-reducer";
+import {actions, ActionsType} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
-import {StateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from "redux";
 
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     dialogsPage: state.dialogsPage,
   }
 };
 
 
-type DispatchType = Dispatch<ActionType>;
+type DispatchType = Dispatch<ActionsType>;
 let mapDispatchToProps = (dispatch: DispatchType) => {
   return {
     sendMessage: (newMessageBody: string) => {

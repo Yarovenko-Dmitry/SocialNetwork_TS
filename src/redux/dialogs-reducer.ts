@@ -8,7 +8,7 @@ type DialogsReducerType =
     newMessageBody: string
   }
 
-let internalState: DialogsReducerType = {
+let initialState: DialogsReducerType = {
   dialogs:
     [
       {id: 1, name: 'Dmitry'},
@@ -30,7 +30,7 @@ let internalState: DialogsReducerType = {
   newMessageBody: ''
 };
 
-const dialogsReducer = (state: DialogsReducerType = internalState, action: ActionType) => {
+const dialogsReducer = (state: DialogsReducerType = initialState, action: ActionsType): InitialStateType => {
 
   switch (action.type) {
     case 'SEND_MESSAGE':
@@ -45,7 +45,7 @@ const dialogsReducer = (state: DialogsReducerType = internalState, action: Actio
   }
 }
 
-export type ActionType = InferActionsTypes<typeof actions>;
+export type ActionsType = InferActionsTypes<typeof actions>;
 
 export const actions = {
   sendMessageActionCreator: (newMessageBody: string) => ({
@@ -55,3 +55,5 @@ export const actions = {
 }
 
 export default dialogsReducer;
+
+export type InitialStateType = typeof initialState

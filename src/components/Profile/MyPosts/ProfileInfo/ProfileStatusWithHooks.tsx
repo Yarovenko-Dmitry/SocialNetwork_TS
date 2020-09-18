@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 
 type ProfileStatusType = {
   status: string,
-  updateStatus: (status: string) =>void
+  updateStatus: (status: string) => void
 }
 
 export const ProfileStatusWithHooks = (props: ProfileStatusType) => {
@@ -10,9 +10,9 @@ export const ProfileStatusWithHooks = (props: ProfileStatusType) => {
   let [editMode, setEditMode] = useState<boolean>(false);
   let [status, setStatus] = useState<string>(props.status);
 
-  useEffect(() =>{
+  useEffect(() => {
     setStatus(props.status);
-  },[props.status]);
+  }, [props.status]);
 
   const activateEditMode = () => {
     setEditMode(true)
@@ -31,7 +31,7 @@ export const ProfileStatusWithHooks = (props: ProfileStatusType) => {
     <div>
       {!editMode &&
       <div>
-        <span onDoubleClick={activateEditMode}>{props.status || 'no STATUS'}</span>
+        <b> Status:</b> <span onDoubleClick={activateEditMode}>{props.status || 'no STATUS'}</span>
       </div>
       }
       {editMode &&

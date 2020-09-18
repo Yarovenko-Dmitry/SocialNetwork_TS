@@ -1,17 +1,17 @@
 import React, {Dispatch} from "react";
-import {actions, ActionType} from "../../../redux/profile-reducer";
+import {actions, ActionsType} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {StateType} from "../../../redux/redux-store";
+import {AppStateType} from "../../../redux/redux-store";
 
-const mapStateToProps = (state: StateType) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
   }
 };
 
-export type DispatchType = Dispatch<ActionType>;
+export type DispatchType = Dispatch<ActionsType>;
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
