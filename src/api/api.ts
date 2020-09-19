@@ -18,13 +18,11 @@ export const usersAPI = {
 
   follow(userId: string) {
     return instance.post(`follow/${userId}`)
-
   },
   unFollow(userId: string) {
     return instance.delete(`follow/${userId}`)
   },
   getProfile(userId: string) {
-    console.warn('Obsolute method. Please use profileAPI object')
     return profileAPI.getProfile(userId);
   }
 }
@@ -54,7 +52,6 @@ export const profileAPI = {
 }
 
 type CaptchaType = null | string;
-
 
 export const authAPI = {
   me() {

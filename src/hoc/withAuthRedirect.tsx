@@ -17,10 +17,7 @@ type DispatchPropsType = {
 
 export function withAuthRedirect<WCP>(Component: React.ComponentType<WCP>) {
 
-  debugger
-
   const RedirectComponent: React.FC<DispatchPropsType & MapPropsType> = (props) => {
-    debugger
     let {isAuth, fake, ...restProps} = props;
     if (!isAuth) {
       return <Redirect to={'/login'}/>

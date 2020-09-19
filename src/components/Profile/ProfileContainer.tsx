@@ -25,20 +25,15 @@ export type ProfileContainerType = {
   saveProfile: (profile: ProfileType) => Promise<any>
 }
 
-
-
 type AddPropsUserIdType = { userId: string };
 
 type PrevPropsType ={
-
 }
 
 type PrevStateType ={
-
 }
 
 type SnapshotType ={
-
 }
 
 class ProfileContainer extends React.Component<ProfileContainerType & RouteComponentProps<AddPropsUserIdType>> {

@@ -15,7 +15,6 @@ let Paginator: React.FC<PaginatorType> = ({
                                             currentPage, onPageChanged,
                                             portionSize = 10
                                           }) => {
-  debugger
 
   let pagesCount = Math.ceil(totalItemsCount / pageSize);
   let pages: Array<number> = [];

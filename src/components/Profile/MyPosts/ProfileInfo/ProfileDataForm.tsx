@@ -10,7 +10,6 @@ type PropsType = {
 }
 type ProfileTypeKeys = GetStringKeys<ProfileType>
 
-// export const ProfileDataForm = ({handleSubmit, profile, error}) => {
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({handleSubmit, profile, error}) => {
   return (
     <form onSubmit={handleSubmit}>

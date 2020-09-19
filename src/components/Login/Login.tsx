@@ -52,7 +52,6 @@ type LoginType = {
 
 const Login = (props: LoginType) => {
   const onSubmit = (formData: LoginFormDataType) => {
-    console.log(formData);
     props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
   }
   return (
